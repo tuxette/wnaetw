@@ -38,4 +38,8 @@ shinyServer(function(input, output) {
 		content = function(file) {
 			write.csv(apply.wmtw(datasetInput())$res, file)
 		})
+		
+	output$boxplots <- reactivePlot(function() {
+		make.boxplot(datasetInput(),main=input$main,xlab=input$xlab,ylab=input$ylab,scale=input$scale)
+	})
 })

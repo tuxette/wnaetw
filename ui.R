@@ -6,11 +6,11 @@ shinyUI(pageWithSidebar(
 	# Create a sidebar on the left
 	sidebarPanel(
 		h2("Input data"),
-		textInput("fileurl",strong("Paste your file's url :"), ""),
+		textInput("fileurl",strong("Paste your file's url:"), ""),
 		# Create a checkbox to let the user specify if headers are included in the csv file
 		checkboxInput(inputId = "header", label = " Are the variable names included in the dataset?", value = TRUE),
 		checkboxInput(inputId = "rownames", label=" Are the observations names included in the dataset?", value=FALSE),
-		checkboxInput(inputId = "quote", label = strong(" Are quote marks in the dataset?"), value = TRUE),
+		checkboxInput(inputId = "quote", label = " Are quote marks in the dataset?", value = TRUE),
 		# Create lists to describe the csv file format
 		selectInput("sep","Column separator",choices=c(",",";","space","tab")),
 		selectInput("dec","Decimal mark",choices=c(".",","))
@@ -33,7 +33,13 @@ shinyUI(pageWithSidebar(
 					p("(only the first 50 first rows if the dataset contains more than 50 rows, and the first 10 columns if the dataset contains more than 10 columns)"),
 					tableOutput("view")
 				),
-				tabPanel("Summary",downloadButton('downloadSummary', 'Download Summary'),br(),br(),tableOutput("summary"))
+				tabPanel("Summary",downloadButton('downloadSummary', 'Download Summary'),br(),br(),tableOutput("summary")),
+				tabPanel("Boxplots",
+					textInput("main",strong("Graphic title:"), "Boxplots"),
+					textInput("xlab",strong("X axis label:"), "Variables"),
+					textInput("ylab",strong("Y axis label:"), ""),
+					checkboxInput(inputId = "scale", label = " Scale variables?", value = TRUE),
+					plotOutput("boxplots"))
 			)
 		)
 	)

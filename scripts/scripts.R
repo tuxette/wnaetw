@@ -29,3 +29,12 @@ apply.wmtw <- function(df) {
 	}
   list("res"=res,"error"=error)
 }
+
+make.boxplot <- function(df,main="Scaled variables boxplots",xlab="Variables",ylab="",scale=TRUE) {
+	# Select numerical variables
+  numVar <- sapply(1:ncol(df),function(x){is.numeric(df[,x])})
+  if (scale) {
+		df[,numVar] <- scale(df[,numVar])
+	}
+  boxplot(as.data.frame(df[,numVar]),main=main,xlab=xlab,ylab=ylab,las=3,cex=0.7,col="royalblue1")
+}
