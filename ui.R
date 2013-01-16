@@ -16,7 +16,7 @@ shinyUI(pageWithSidebar(
 		selectInput("dec","Decimal mark",choices=c(".",",")),
 		br(),
 		p(HTML("This application is kindly provided by <a href='http://tuxette.nathalievilla.org'><font color='#DF01A5'><b>Natty</b></font></a> with the generous help of <font color='#3E2D8E'><b>Nicholas</b></font>, <font color='#159332'><b>Arthur P.</b></font> and <font color='#159332'><b>John</b></font> ;-)")),
-		p(HTML("Get the sources at my <b>git server</b>:<br><span style='font-size:12px;font-family:courrier;background-color:#FBBEF5;border:1px solid black;'><font color='#870500'><b>git clone http://git.nathalievilla.org/wnaetw-online.git/</b></font></code></span>"))
+		p(HTML("Get the sources at my <b>git server</b>:<br><span style='font-size:12px;font-family:courrier;background-color:#FADDF2;border:1px solid black;'><font color='#870500'><b>git clone http://git.nathalievilla.org/wnaetw-online.git/</b></font></code></span>"))
 	),
 
 	# Main panel definition
