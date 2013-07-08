@@ -1,4 +1,5 @@
 # Open a page
+# change this
 shinyUI(pageWithSidebar(
 	# Application title
 	headerPanel("Welcome lazy student ! You're currently using the package 'What Nicolas's teacher wants' "),
