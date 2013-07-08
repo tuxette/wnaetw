@@ -3,6 +3,7 @@ library(ineq)
 library(e1071)
 library(graphics)
 library(stats)
+## Change this
 shinyServer(function(input, output) {
 	# This function loads the dataset using the different options specified by the user in ui.R
 	datasetInput <- reactive(function() {
