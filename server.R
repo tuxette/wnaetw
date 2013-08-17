@@ -1,4 +1,6 @@
 source("scripts/scripts.R")
+library(e1071)
+library(ineq)
 
 shinyServer(function(input, output) {
   dInput <- reactive({
