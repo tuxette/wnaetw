@@ -7,17 +7,21 @@ library(stats)
 shinyServer(function(input, output) {
 	# This function loads the dataset using the different options specified by the user in ui.R
 	datasetInput <- reactive(function() {
-		separator <- switch(input$sep,","=",",	";"=";","space"=" ","tab"="\t")
-		if (input$quote) {quotesymb <- "\""} else {quotesymb <- ""}
-		if (input$rownames) {
-			res <- read.table(input$fileurl, header=input$header, dec=input$dec, sep=separator, stringsAsFactor=FALSE, quote=quotesymb, row.names=1)
-		} else {
-			res <- read.table(input$fileurl, header=input$header, dec=input$dec, sep=separator, stringsAsFactor=FALSE, quote=quotesymb)
-		}
-	res
-})
+	  in.file <- input$dfile
+	  
+	  if (is.null(in.file))
+	    return(NULL)
+	  
+	  if (input$rownames) {
+	    read.table(in.file$datapath, header=input$header, sep=input$sep,
+	               quote=input$quote, row.names=1, dec=input$dec)
+	  } else {
+	    read.table(in.file$datapath, header=input$header, sep=input$sep,
+	               quote=input$quote, dec=input$dec)
+	  }
+  })
 
-	output$view <- reactiveTable(function() {
+	output$view <- renderTable({
 		all.data <- datasetInput()
 		if (nrow(all.data)>50) {
 			all.data <- all.data[1:50,]
@@ -26,10 +30,10 @@ shinyServer(function(input, output) {
 			all.data <- all.data[,1:10]
 		}
 		all.data
-})
+  })
 
-	# This function calculate the output (print) of sent to the main panel in ui.R
-	output$summary <- reactiveTable(function() {
+	# This function calculates the output sent to the main panel in ui.R
+	output$summary <- renderTable({
 		dataset <- datasetInput()
 		t(apply.wmtw(dataset)$res)
 	})
@@ -38,9 +42,11 @@ shinyServer(function(input, output) {
 		filename = "summary.csv",
 		content = function(file) {
 			write.csv(apply.wmtw(datasetInput())$res, file)
-		})
-		
+	})
+	
+  # This function makes a boxplot for the numeric variables in the data set
 	output$boxplots <- reactivePlot(function() {
-		make.boxplot(datasetInput(),main=input$main,xlab=input$xlab,ylab=input$ylab,scale=input$scale)
+		make.boxplot(datasetInput(),main=input$main,xlab=input$xlab,ylab=input$ylab,
+                 scale=input$scale, col=input$color)
 	})
 })
