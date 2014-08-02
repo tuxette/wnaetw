@@ -5,16 +5,21 @@ library(ineq)
 shinyServer(function(input, output) {
   dInput <- reactive({
     in.file <- input$file1
+    quoteMark <- switch(input$quote,
+                        "Double Quote"="\"", "Single Quote"="'", "No Quote"="")
+    sepMark <- switch(input$sep,
+                      "Comma"=",","Semicolon"=";","Tab"="\t", "Space"=" ")
+    decMark <- switch(input$dec, "Dot"=".", "Comma"=",")
     
     if (is.null(in.file))
       return(NULL)
     
     if (input$rownames) {
-      read.table(in.file$datapath, header=input$header, sep=input$sep,
-               quote=input$quote, row.names=1, dec=input$dec)
+      read.table(in.file$datapath, header=input$header, sep=sepMark,
+               quote=quoteMark, row.names=1, dec=decMark)
     } else {
-      read.table(in.file$datapath, header=input$header, sep=input$sep,
-                 quote=input$quote, dec=input$dec)
+      read.table(in.file$datapath, header=input$header, sep=sepMark,
+                 quote=quoteMark, dec=decMark)
     }
   })
   

@@ -11,12 +11,16 @@ shinyUI(pageWithSidebar(
 		          accept=c('text/csv', 'text/comma-separated-values,text/plain')),
 		checkboxInput('header', ' Header?', TRUE),
     checkboxInput('rownames', ' Row names?', FALSE),
-		selectInput('sep', 'Separator:',
-                c(Comma=',',Semicolon=';',Tab='\t', Space=' '), 'Comma'),
-		selectInput('quote', 'Quote:',
-                c(None='','Double Quote'='"','Single Quote'="'"),
-                 'Double Quote'),
-		selectInput('dec', 'Decimal mark', c(Dot='.', Comma=','), 'Dot'),
+# 		selectInput('sep', 'Separator:',
+#                 c("Comma"=',',"Semicolon"=';',"Tab"='\t', "Space"=' ')),
+# 		selectInput('quote', 'Quote:',
+#                 c('Double Quote (")'='"', "Single Quote (')"="'",
+#                   'No Quote'="")),
+# 		selectInput('dec', 'Decimal mark', c("Dot"='.', "Comma"=',')),
+    selectInput("sep", "Separator:", c("Comma","Semicolon","Tab", "Space")),
+    selectInput("quote", "Quote:",
+                c("Double Quote", "Single Quote", "No Quote")),
+    selectInput("dec", "Decimal mark", c("Dot", "Comma")),
  		br(),
 		p(HTML("Get the sources on <b>github</b>:<br>
            <span style='font-size:12px;font-family:courrier;
@@ -40,7 +44,7 @@ shinyUI(pageWithSidebar(
                        import button on the left hand side panel. You data must
                        be supplied on the form of a text/csv file. An example
                        of a properly formatted file is provided at <a href=
-'http://owncloud.nathalievilla.org/apps/files_sharing/get.php?token=a4ccfca90d9c7928ceb6153929d4212bd90badc5'
+'http://owncloud.nathalievilla.org/public.php?service=files&t=a3dc68caee7452edaef4020e312529bc'
                        >here</a> (it contains simple data on my former 
                        first-year students): this file is formatted using the 
                        default options of the left panel. If the importation is
